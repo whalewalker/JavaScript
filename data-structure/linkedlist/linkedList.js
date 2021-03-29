@@ -18,12 +18,12 @@ class linkedList {
     return this.#size;
   }
 
-  get first(){
-      return this.head.data;
+  get first() {
+    return this.head.data;
   }
 
-  get last(){
-      return this.tail.data;
+  get last() {
+    return this.tail.data;
   }
 
   addHead(data) {
@@ -54,28 +54,87 @@ class linkedList {
     this.#size++;
   }
 
-  removeHead(){
-      let removedNode = this.head;
+  removeHead() {
+    let removedNode = this.head;
 
-      if(!this.head) return undefined;
+    if (!this.head) return undefined;
 
-      this.head = this.head.next;
-      this.head.prev = null;
+    this.head = this.head.next;
+    this.head.prev = null;
 
-      this.#size--;
-      return removedNode.data;
+    this.#size--;
+    return removedNode.data;
   }
 
-  removeTail(){
+  removeTail() {
     let removedNode = this.tail;
 
-    if(!this.head) return undefined;
+    if (!this.head) return undefined;
 
     this.tail = removedNode.prev;
     this.tail.next = null;
 
     this.#size--;
     return removedNode.data;
+  }
+
+  find(index) {
+    let current;
+    if (index < 0 || index >= this.#size) return undefined;
+
+    if (index <= this.#size / 2) {
+      current = this.head;
+      for (let count = 0; count < index; count++) {
+        current = current.next;
+      }
+    } else {
+      for (let count = this.#size; count < index; count--) {
+        current = current.prev;
+      }
+    }
+    return current;
+  }
+
+  insert(data, index) {
+    if (index < 0 || index > this.#size) return null;
+
+    if (index === this.#size) this.addTail(data);
+
+    if (index === 0) this.addHead(data);
+
+    let previousNode = this.find(index - 1);
+    let newNode = new Node(data);
+
+    let temp = previousNode.next;
+
+    previousNode.next = newNode;
+    newNode.next = temp;
+    newNode.prev = previousNode;
+
+    this.#size;
+    return newNode;
+  }
+
+  remove(index){
+    if (index < 0 || index >= this.#size) return null;
+
+    if(index === this.#size) return this.removeTail;
+
+    if(index === 0) return this.removeHead;
+
+    let removed = this.find(index);
+
+    removed.prev.next = removed.next;
+    removed.next.prev = removed.prev;
+
+    this.#size--;
+    return removed;
+  }
+
+  update(data, index){
+    let node = this.find(index);
+    if(node) node.data = data;
+    return node;
   }
 }
 
@@ -86,8 +145,12 @@ linked.addHead([775, 74]);
 
 linked.addHead(2 + 4);
 linked.addHead(76437);
-linked.addHead({"hell": 74});
+linked.addHead({ hell: 74 });
 
+console.log(linked.insert(23, 2))
+console.log(linked.update(56, 2))
+console.log(linked.remove(2))
 
+console.log(linked.find(2));
 console.log(linked.removeHead())
 console.log(linked.removeTail())
