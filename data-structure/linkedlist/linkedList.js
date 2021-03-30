@@ -26,31 +26,32 @@ class linkedList {
     return this.tail.data;
   }
 
-  addHead(data) {
-    let newNode = new Node(data);
-
+  add_if_link_is_empty(node) {
     if (!this.head) {
-      this.head = newNode;
+      this.head = node;
       this.tail = this.head;
     }
+  }
+
+  addHead(data) {
+    let newNode = new Node(data);
+    this.add_if_link_is_empty(newNode);
 
     this.head.prev = newNode;
     newNode.next = this.head;
     this.head = newNode;
+
     this.#size++;
   }
 
   addTail(data) {
-    let newNode = new Node(val);
-
-    if (!this.head) {
-      this.head = newNode;
-      this.tail = this.head;
-    }
+    let newNode = new Node(data);
+    this.add_if_link_is_empty(newNode);
 
     this.tail.next = newNode;
     newNode.prev = this.tail;
     this.tail = newNode;
+
     this.#size++;
   }
 
@@ -88,7 +89,7 @@ class linkedList {
         current = current.next;
       }
     } else {
-      for (let count = this.#size; count < index; count--) {
+      for (let count = this.#size; count >= index; count--) {
         current = current.prev;
       }
     }
@@ -111,16 +112,16 @@ class linkedList {
     newNode.next = temp;
     newNode.prev = previousNode;
 
-    this.#size;
+    this.#size++;
     return newNode;
   }
 
-  remove(index){
+  remove(index) {
     if (index < 0 || index >= this.#size) return null;
 
-    if(index === this.#size) return this.removeTail;
+    if (index === this.#size) return this.removeTail;
 
-    if(index === 0) return this.removeHead;
+    if (index === 0) return this.removeHead;
 
     let removed = this.find(index);
 
@@ -131,9 +132,9 @@ class linkedList {
     return removed;
   }
 
-  update(data, index){
+  update(data, index) {
     let node = this.find(index);
-    if(node) node.data = data;
+    if (node) node.data = data;
     return node;
   }
 }
@@ -147,10 +148,10 @@ linked.addHead(2 + 4);
 linked.addHead(76437);
 linked.addHead({ hell: 74 });
 
-console.log(linked.insert(23, 2))
-console.log(linked.update(56, 2))
-console.log(linked.remove(2))
+console.log(linked.insert(23, 2));
+console.log(linked.update(56, 2));
+console.log(linked.remove(2));
 
 console.log(linked.find(2));
-console.log(linked.removeHead())
-console.log(linked.removeTail())
+console.log(linked.removeHead());
+console.log(linked.removeTail());
