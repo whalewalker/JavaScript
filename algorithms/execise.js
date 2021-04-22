@@ -432,20 +432,5 @@ const isValid = (email) => {
   return false;
 };
 
-// const signIn = (email) =>{
-//   if(isLoggedIn(email))
-//   console.log("Successfully logged in")
-// }
-
-// const isLoggedIn = (email) =>{
-//   // usersData.forEach(element => {
-//   //       if(element.isLoggedIn === false){
-//   //         element.isLoggedIn = true;
-//   //         return true;
-//   //       }
-//   // });
-// }
-
 signUp({ username: "Abdullah", email: "ohida@gmail.com", password: "123456" });
-// signIn('thomas@thomas.com')
 console.log(usersData.forEach(item => console.log(Object.entries(item))));
