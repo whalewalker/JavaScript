@@ -58,7 +58,7 @@ class linkedList {
   removeHead() {
     let removedNode = this.head;
 
-    if (!this.head) return undefined;
+    if (!this.head) return new TypeError("Linked list is empty");
 
     this.head = this.head.next;
     this.head.prev = null;
@@ -70,7 +70,7 @@ class linkedList {
   removeTail() {
     let removedNode = this.tail;
 
-    if (!this.head) return undefined;
+    if (!this.head) return new TypeError("Linked list is empty");;
 
     this.tail = removedNode.prev;
     this.tail.next = null;
@@ -81,7 +81,8 @@ class linkedList {
 
   find(index) {
     let current;
-    if (index < 0 || index >= this.#size) return undefined;
+    if (index < 0 ) return new TypeError("Linked list is empty");
+    if (index >= this.#size) return new TypeError("Linked list index out of bound");;
 
     if (index <= this.#size / 2) {
       current = this.head;
@@ -89,6 +90,7 @@ class linkedList {
         current = current.next;
       }
     } else {
+      current = this.tail;
       for (let count = this.#size; count >= index; count--) {
         current = current.prev;
       }
@@ -117,7 +119,7 @@ class linkedList {
   }
 
   remove(index) {
-    if (index < 0 || index >= this.#size) return null;
+    if (index < 0 || index > this.#size) return null;
 
     if (index === this.#size) return this.removeTail;
 
@@ -148,10 +150,10 @@ linked.addHead(2 + 4);
 linked.addHead(76437);
 linked.addHead({ hell: 74 });
 
-console.log(linked.insert(23, 2));
-console.log(linked.update(56, 2));
-console.log(linked.remove(2));
+// console.log(linked.insert(23, 2));
+// console.log(linked.update(56, 2));
+// console.log(linked.remove(2));
 
-console.log(linked.find(2));
-console.log(linked.removeHead());
-console.log(linked.removeTail());
+console.log(linked.find(5));
+// console.log(linked.removeHead());
+// console.log(linked.removeTail());
